@@ -35,7 +35,7 @@ public class Announcement implements Serializable {
     private LocalDateTime createdAt;
 
     @Column
-    private Boolean active;
+    private boolean active;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
