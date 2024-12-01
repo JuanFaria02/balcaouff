@@ -33,7 +33,9 @@ public class SecurityConfigurations {
                         .requestMatchers("/auth/register", HttpMethod.POST.name()).permitAll()
                         .requestMatchers("/api/anuncios", HttpMethod.GET.name()).authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-                .logout(logout -> logout.deleteCookies("our-custom-cookie"))
+                .logout(logout -> logout.logoutUrl("/auth/logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
                 .build();
     }
 
