@@ -1,11 +1,8 @@
 package com.balcao.uff.repository;
 
 import com.balcao.uff.domain.Announcement;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface AnnouncementRepository extends Repository<Announcement, Long> {
-    List<Announcement> findAll();
+public interface AnnouncementRepository extends JpaRepository<Announcement, Long> {
 }
 
