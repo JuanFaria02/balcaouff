@@ -1,6 +1,7 @@
 package com.balcao.uff.domain;
 
 import com.balcao.uff.domain.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +45,7 @@ public class User implements UserDetails, Serializable {
     private boolean active;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Announcement> announcements = new ArrayList<>();
 
     @Override
