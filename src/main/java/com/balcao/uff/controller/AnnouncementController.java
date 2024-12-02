@@ -50,5 +50,4 @@ public class AnnouncementController {
         obj = announcementService.update(obj);
         return ResponseEntity.ok().body(obj);
     }
-
 }

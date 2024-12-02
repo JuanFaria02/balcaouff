@@ -1,5 +1,6 @@
 package com.balcao.uff.domain;
 
+import com.balcao.uff.domain.dtos.UserDto;
 import com.balcao.uff.domain.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -85,5 +86,13 @@ public class User implements UserDetails, Serializable {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public void copyDto(UserDto userDto) {
+        this.id = userDto.getId();
+        this.email = userDto.getEmail();
+        this.name = userDto.getName();
+        this.phone = userDto.getPhone();
+        this.active = userDto.isActive();
     }
 }
