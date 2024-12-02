@@ -20,22 +20,25 @@ public class Announcement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "text", nullable = false)
     private String description;
 
-    @Column
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private AnnouncementType type;
 
     @Column
     @Timestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column
     private boolean active;
+
+    @Column
+    private Long rating;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
