@@ -4,6 +4,7 @@ import com.balcao.uff.domain.User;
 import com.balcao.uff.domain.dtos.AuthenticationDTO;
 import com.balcao.uff.domain.dtos.LoginResponseDTO;
 import com.balcao.uff.domain.dtos.RegisterDTO;
+import com.balcao.uff.domain.dtos.UserDto;
 import com.balcao.uff.security.TokenService;
 import com.balcao.uff.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Validated AuthenticationDTO data){
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Validated AuthenticationDTO data){
         UsernamePasswordAuthenticationToken emailPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = authenticationManager.authenticate(emailPassword);
 
@@ -38,7 +39,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Validated RegisterDTO data){
+    public ResponseEntity<UserDto> register(@RequestBody @Validated RegisterDTO data){
         if (userService.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
@@ -46,6 +47,6 @@ public class AuthenticationController {
 
         userService.insert(newUser);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(new UserDto(newUser));
     }
 }
