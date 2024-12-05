@@ -4,9 +4,6 @@ import com.balcao.uff.domain.dtos.UserDto;
 import com.balcao.uff.domain.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,9 +15,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,5 +88,46 @@ public class User implements UserDetails, Serializable {
         this.name = userDto.getName();
         this.phone = userDto.getPhone();
         this.active = userDto.isActive();
+    }
+
+    public User() {}
+
+    public User(Long id, String name, String password, String email, String phone, UserType userType, List<Announcement> announcements, boolean active) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.userType = userType;
+        this.announcements = announcements;
+        this.active = active;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public List<Announcement> getAnnouncements() {
+        return announcements;
     }
 }

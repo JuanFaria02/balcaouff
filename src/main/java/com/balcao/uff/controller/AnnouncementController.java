@@ -2,7 +2,6 @@ package com.balcao.uff.controller;
 
 import com.balcao.uff.domain.Announcement;
 import com.balcao.uff.service.AnnouncementService;
-import com.balcao.uff.service.exceptions.DatabaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
