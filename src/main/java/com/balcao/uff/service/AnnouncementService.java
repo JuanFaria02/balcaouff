@@ -49,6 +49,10 @@ public class AnnouncementService {
         if (announcement.getId() != null) {
             throw new DatabaseException("Esse anúncio já existe");
         }
-        return announcementRepository.save(announcement);
+        try {
+            return announcementRepository.save(announcement);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 }

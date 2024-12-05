@@ -33,7 +33,7 @@ public class Announcement implements Serializable {
     private String location;
 
     @Column
-    private boolean active;
+    private boolean active = true;
 
     @Column
     private Long rating;
