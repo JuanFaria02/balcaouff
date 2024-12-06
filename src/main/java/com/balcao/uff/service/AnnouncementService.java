@@ -4,7 +4,6 @@ import com.balcao.uff.domain.Announcement;
 import com.balcao.uff.repository.AnnouncementRepository;
 import com.balcao.uff.service.exceptions.DatabaseException;
 import com.balcao.uff.service.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -50,6 +49,10 @@ public class AnnouncementService {
         if (announcement.getId() != null) {
             throw new DatabaseException("Esse anúncio já existe");
         }
-        return announcementRepository.save(announcement);
+        try {
+            return announcementRepository.save(announcement);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 }

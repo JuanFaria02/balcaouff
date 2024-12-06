@@ -13,6 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Autowired
     private EnvProperties envProperties;
 
+    @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(envProperties.getFrontendUrl())

@@ -2,7 +2,7 @@ package com.balcao.uff.controller;
 
 import com.balcao.uff.domain.Announcement;
 import com.balcao.uff.service.AnnouncementService;
-import com.balcao.uff.service.exceptions.DatabaseException;
+import com.balcao.uff.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +16,8 @@ import java.util.List;
 public class AnnouncementController {
     @Autowired
     private AnnouncementService announcementService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/anuncios")
     public ResponseEntity<List<Announcement>> findAll() {
