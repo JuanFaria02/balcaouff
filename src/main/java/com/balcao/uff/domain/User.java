@@ -37,7 +37,7 @@ public class User implements UserDetails, Serializable {
     private UserType userType;
 
     @Column(nullable = false)
-    private boolean active;
+    private boolean active = true;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
