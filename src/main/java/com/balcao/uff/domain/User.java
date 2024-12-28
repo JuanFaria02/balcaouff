@@ -2,6 +2,7 @@ package com.balcao.uff.domain;
 
 import com.balcao.uff.domain.dtos.UserDto;
 import com.balcao.uff.domain.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -51,6 +53,14 @@ public class User implements UserDetails, Serializable {
 
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
+
+    @JsonGetter("authorities")
+    public List<String> getAuthoritiesAsString() {
+        return getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public boolean isAccountNonExpired() {
